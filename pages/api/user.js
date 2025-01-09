@@ -14,7 +14,6 @@ export default async function handler(request, response) {
       response.status(200).json(user);
       return;
     } catch (error) {
-      console.log(error);
       response.status(500).json({ status: "error finding user" });
       return;
     }
