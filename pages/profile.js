@@ -18,10 +18,10 @@ const ProfileContainer = styled.div`
 `;
 
 export default function UserProfile() {
-  const { data, error } = useSWR("/api/user");
+  const { data, error, isLoading } = useSWR("/api/user");
 
   if (error) return <p>Failed to load user data</p>;
-  if (!data) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
 
   const { firstName, lastName, email, linkedin, role, expertise, photo } = data;
 
@@ -34,8 +34,8 @@ export default function UserProfile() {
         height={100}
         style={{ borderRadius: "50%" }}
       />
-      <h1>{firstName}</h1>
-      <h1>{lastName}</h1>
+      <p>{firstName}</p>
+      <p>{lastName}</p>
       <p>{email}</p>
       <p>{linkedin}</p>
       <p>{role}</p>
