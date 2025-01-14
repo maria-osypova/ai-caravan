@@ -1,45 +1,69 @@
-import useSWR from "swr";
-import styled from "styled-components";
+import useSWR, { mutate } from "swr";
+import { useState } from "react";
 import Image from "next/image";
-
-const ProfileContainer = styled.div`
-  padding: 16px;
-  margin: 0 auto;
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
-
-  @media (min-width: 768px) {
-    max-width: 600px;
-    padding: 24px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-`;
+import { ProfileContainer } from "@/components/ProfileContainer";
+import { StyledButton } from "@/components/StyledButton";
+import EditProfileForm from "@/components/EditProfileForm";
+import { set } from "mongoose";
 
 export default function UserProfile() {
   const { data, error, isLoading } = useSWR("/api/user");
-
+  const [isEditing, setIsEditing] = useState(false);
   if (error) return <p>Failed to load user data</p>;
   if (isLoading) return <p>Loading...</p>;
+  const { _id, firstName, lastName, email, linkedin, role, expertise, photo } =
+    data;
 
-  const { firstName, lastName, email, linkedin, role, expertise, photo } = data;
+  function handleEditClick() {
+    setIsEditing(true);
+  }
+
+  function handleCancelClick() {
+    setIsEditing(false);
+  }
+
+  async function handleFormSubmit(updateData) {
+    const response = await fetch("/api/user", {
+      method: "PUT",
+      body: JSON.stringify(updateData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      setIsEditing(false);
+      mutate("/api/user");
+    } else {
+      console.error(`Error: ${response.status}`);
+    }
+  }
 
   return (
-    <ProfileContainer>
-      <Image
-        src={photo}
-        alt={`${firstName} ${lastName}`}
-        width={100}
-        height={100}
-        style={{ borderRadius: "50%" }}
-      />
-      <p>{firstName}</p>
-      <p>{lastName}</p>
-      <p>{email}</p>
-      <p>{linkedin}</p>
-      <p>{role}</p>
-      <p>{expertise}</p>
-    </ProfileContainer>
+    <>
+      {isEditing ? (
+        <EditProfileForm
+          onCancel={handleCancelClick}
+          defaultData={data}
+          onSubmit={handleFormSubmit}
+        />
+      ) : (
+        <ProfileContainer>
+          <Image
+            src={photo}
+            alt={`${firstName} ${lastName}`}
+            width={100}
+            height={100}
+            style={{ borderRadius: "50%" }}
+          />
+          <p>{firstName}</p>
+          <p>{lastName}</p>
+          <p>{email}</p>
+          <p>{linkedin}</p>
+          <p>{role}</p>
+          <p>{expertise}</p>
+          <StyledButton onClick={handleEditClick}>Edit</StyledButton>
+        </ProfileContainer>
+      )}
+    </>
   );
 }
