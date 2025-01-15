@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import useSWR from "swr";
 import Card from "@/components/Card";
+import Filter from "@/components/Filter";
 
 const ListContainer = styled.ul`
   list-style: none;
@@ -18,19 +19,22 @@ export default function UserProfiles() {
   if (isLoading) return <p>Loading...</p>;
   if (data.length === 0) return <p>No profiles to show</p>;
   return (
-    <ListContainer>
-      {data.map((user) => (
-        <li key={user._id}>
-          <Card
-            photo={user.photo}
-            firstName={user.firstName}
-            lastName={user.lastName}
-            role={user.role}
-            linkedin={user.linkedin}
-            expertise={user.expertise}
-          />
-        </li>
-      ))}
-    </ListContainer>
+    <>
+      <Filter />
+      <ListContainer>
+        {data.map((user) => (
+          <li key={user._id}>
+            <Card
+              photo={user.photo}
+              firstName={user.firstName}
+              lastName={user.lastName}
+              role={user.role}
+              linkedin={user.linkedin}
+              expertise={user.expertise}
+            />
+          </li>
+        ))}
+      </ListContainer>
+    </>
   );
 }
