@@ -24,11 +24,11 @@ export default function UserProfiles() {
     <>
       <Filter onExpertiseSelect={setSelectedExpertise} />
       {error ? (
-        <p>No profiles to show</p>
+        <p>No relevant profiles found</p>
       ) : isLoading ? (
         <p>Loading...</p>
       ) : data.length === 0 ? (
-        <p>No profiles to show</p>
+        <p>No relevant profiles found</p>
       ) : (
         <ListContainer>
           {data.map((user) => (
