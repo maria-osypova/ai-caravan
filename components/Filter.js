@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "@mui/material";
 
@@ -7,7 +8,8 @@ const FilterContainer = styled.div`
   padding: 10px;
 `;
 
-const expertiseTags = [
+const expertises = [
+  "All",
   "AI&Data",
   "Engineering",
   "Business",
@@ -17,11 +19,26 @@ const expertiseTags = [
   "Investments",
 ];
 
-export default function Filter() {
+export default function Filter({ onExpertiseSelect }) {
+  const [selectedExpertiseTag, setSelectedExpertiseTag] = useState("All");
+
+  const handleExpertiseClick = (expertise) => {
+    setSelectedExpertiseTag(expertise);
+    onExpertiseSelect(expertise);
+  };
+
   return (
     <FilterContainer>
-      {expertiseTags.map((tag) => (
-        <Button key={tag}>{tag}</Button>
+      {expertises.map((expertise) => (
+        <Button
+          key={expertise}
+          onClick={() => handleExpertiseClick(expertise)}
+          variant={
+            selectedExpertiseTag === expertise ? "contained" : "outlined"
+          }
+        >
+          {expertise}
+        </Button>
       ))}
     </FilterContainer>
   );
