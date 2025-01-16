@@ -20,27 +20,31 @@ export default function UserProfiles() {
     `/api/users?expertise=${encodeURIComponent(selectedExpertise)}`
   );
 
-  if (error) return <p>Failed to load users data</p>;
-  if (isLoading) return <p>Loading...</p>;
-  if (data.length === 0) return <p>No profiles to show</p>;
-
   return (
     <>
       <Filter onExpertiseSelect={setSelectedExpertise} />
-      <ListContainer>
-        {data.map((user) => (
-          <li key={user._id}>
-            <Card
-              photo={user.photo}
-              firstName={user.firstName}
-              lastName={user.lastName}
-              role={user.role}
-              linkedin={user.linkedin}
-              expertise={user.expertise}
-            />
-          </li>
-        ))}
-      </ListContainer>
+      {error ? (
+        <p>No profiles to show</p>
+      ) : isLoading ? (
+        <p>Loading...</p>
+      ) : data.length === 0 ? (
+        <p>No profiles to show</p>
+      ) : (
+        <ListContainer>
+          {data.map((user) => (
+            <li key={user._id}>
+              <Card
+                photo={user.photo}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                role={user.role}
+                linkedin={user.linkedin}
+                expertise={user.expertise}
+              />
+            </li>
+          ))}
+        </ListContainer>
+      )}
     </>
   );
 }
