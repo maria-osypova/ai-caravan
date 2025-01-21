@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ProfileContainer } from "@/components/ProfileContainer";
 import { StyledButton } from "@/components/StyledButton";
 import EditProfileForm from "@/components/EditProfileForm";
-import { set } from "mongoose";
+import { Button } from "@mui/material";
 
 export default function UserProfile() {
   const { data, error, isLoading } = useSWR("/api/user");
@@ -61,7 +61,7 @@ export default function UserProfile() {
           <p>{linkedin}</p>
           <p>{role}</p>
           <p>{expertise}</p>
-          <StyledButton onClick={handleEditClick}>Edit</StyledButton>
+          <Button onClick={handleEditClick}>Edit</Button>
         </ProfileContainer>
       )}
     </>

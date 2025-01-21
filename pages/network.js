@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import useSWR from "swr";
 import Card from "@/components/Card";
+import Filter from "@/components/Filter";
+import { useState } from "react";
 
 const ListContainer = styled.ul`
   list-style: none;
@@ -13,24 +15,36 @@ const ListContainer = styled.ul`
 `;
 
 export default function UserProfiles() {
-  const { data, error, isLoading } = useSWR("/api/users");
-  if (error) return <p>Failed to load users data</p>;
-  if (isLoading) return <p>Loading...</p>;
-  if (data.length === 0) return <p>No profiles to show</p>;
+  const [selectedExpertise, setSelectedExpertise] = useState("All");
+  const { data, error, isLoading } = useSWR(
+    `/api/users?expertise=${encodeURIComponent(selectedExpertise)}`
+  );
+
   return (
-    <ListContainer>
-      {data.map((user) => (
-        <li key={user._id}>
-          <Card
-            photo={user.photo}
-            firstName={user.firstName}
-            lastName={user.lastName}
-            role={user.role}
-            linkedin={user.linkedin}
-            expertise={user.expertise}
-          />
-        </li>
-      ))}
-    </ListContainer>
+    <>
+      <Filter onExpertiseSelect={setSelectedExpertise} />
+      {error ? (
+        <p>No relevant profiles found</p>
+      ) : isLoading ? (
+        <p>Loading...</p>
+      ) : data.length === 0 ? (
+        <p>No relevant profiles found</p>
+      ) : (
+        <ListContainer>
+          {data.map((user) => (
+            <li key={user._id}>
+              <Card
+                photo={user.photo}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                role={user.role}
+                linkedin={user.linkedin}
+                expertise={user.expertise}
+              />
+            </li>
+          ))}
+        </ListContainer>
+      )}
+    </>
   );
 }
