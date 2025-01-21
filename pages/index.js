@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
@@ -11,7 +10,6 @@ export default function HomePage() {
         </span>{" "}
         by Mari.
       </p>
-      <Footer />
     </>
   );
 }

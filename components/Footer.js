@@ -42,7 +42,6 @@ const Footer = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "8px",
-            height: "100%",
           }}
         />
         <BottomNavigationAction
@@ -59,7 +58,6 @@ const Footer = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "8px",
-            height: "100%",
           }}
         />
         <BottomNavigationAction
@@ -76,7 +74,6 @@ const Footer = () => {
             justifyContent: "center",
             alignItems: "center",
             gap: "8px",
-            height: "100%",
           }}
         />
       </BottomNavigation>

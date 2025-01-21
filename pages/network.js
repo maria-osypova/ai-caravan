@@ -16,8 +16,9 @@ const ListContainer = styled.ul`
   flex-direction: column;
   gap: 20px;
   margin: 0;
-  width: 100%;
+  width: 85%;
   flex: 1;
+  overflow-y: auto;
   padding-bottom: 74px;
 `;
 
