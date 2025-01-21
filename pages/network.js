@@ -4,14 +4,21 @@ import Card from "@/components/Card";
 import Filter from "@/components/Filter";
 import { useState } from "react";
 
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
 const ListContainer = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
-  margin: 0 0;
+  margin: 0;
   width: 100%;
+  flex: 1;
+  padding-bottom: 74px;
 `;
 
 export default function UserProfiles() {
@@ -21,7 +28,7 @@ export default function UserProfiles() {
   );
 
   return (
-    <>
+    <PageContainer>
       <Filter onExpertiseSelect={setSelectedExpertise} />
       {error ? (
         <p>No relevant profiles found</p>
@@ -45,6 +52,6 @@ export default function UserProfiles() {
           ))}
         </ListContainer>
       )}
-    </>
+    </PageContainer>
   );
 }

@@ -10,6 +10,7 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
+    "@fontsource/ibm-plex-sans": "^5.1.1",
     "@mui/icons-material": "^6.4.0",
     "@mui/material": "^6.4.0",
     "@mui/styled-engine-sc": "^6.4.0",
