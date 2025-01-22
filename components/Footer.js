@@ -32,13 +32,9 @@ const Footer = () => {
         <BottomNavigationAction
           label="EXPLORE"
           value="/"
-          icon={
-            <Link href="/" legacyBehavior passHref>
-              <a style={{ textDecoration: "none", color: "inherit" }}>
-                <Explore />
-              </a>
-            </Link>
-          }
+          component={Link}
+          href="/"
+          icon={<Explore />}
           sx={{
             color: currentPath === "/" ? "#2525A7" : "#000",
             textTransform: "uppercase",
@@ -53,13 +49,9 @@ const Footer = () => {
         <BottomNavigationAction
           label="NETWORK"
           value="/network"
-          icon={
-            <Link href="/network" legacyBehavior passHref>
-              <a style={{ textDecoration: "none", color: "inherit" }}>
-                <People />
-              </a>
-            </Link>
-          }
+          component={Link}
+          href="/network"
+          icon={<People />}
           sx={{
             color: currentPath === "/network" ? "#2525A7" : "#000",
             textTransform: "uppercase",
@@ -74,13 +66,9 @@ const Footer = () => {
         <BottomNavigationAction
           label="PROFILE"
           value="/profile"
-          icon={
-            <Link href="/profile" legacyBehavior passHref>
-              <a style={{ textDecoration: "none", color: "inherit" }}>
-                <AccountCircle />
-              </a>
-            </Link>
-          }
+          component={Link}
+          href="/profile"
+          icon={<AccountCircle />}
           sx={{
             color: currentPath === "/profile" ? "#2525A7" : "#000",
             textTransform: "uppercase",
