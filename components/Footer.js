@@ -2,6 +2,7 @@ import React from "react";
 import { Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { Explore, People, AccountCircle } from "@mui/icons-material";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Footer = () => {
   const router = useRouter();
@@ -31,8 +32,13 @@ const Footer = () => {
         <BottomNavigationAction
           label="EXPLORE"
           value="/"
-          icon={<Explore />}
-          onClick={() => router.push("/")}
+          icon={
+            <Link href="/" legacyBehavior passHref>
+              <a style={{ textDecoration: "none", color: "inherit" }}>
+                <Explore />
+              </a>
+            </Link>
+          }
           sx={{
             color: currentPath === "/" ? "#2525A7" : "#000",
             textTransform: "uppercase",
@@ -47,8 +53,13 @@ const Footer = () => {
         <BottomNavigationAction
           label="NETWORK"
           value="/network"
-          icon={<People />}
-          onClick={() => router.push("/network")}
+          icon={
+            <Link href="/network" legacyBehavior passHref>
+              <a style={{ textDecoration: "none", color: "inherit" }}>
+                <People />
+              </a>
+            </Link>
+          }
           sx={{
             color: currentPath === "/network" ? "#2525A7" : "#000",
             textTransform: "uppercase",
@@ -63,8 +74,13 @@ const Footer = () => {
         <BottomNavigationAction
           label="PROFILE"
           value="/profile"
-          icon={<AccountCircle />}
-          onClick={() => router.push("/profile")}
+          icon={
+            <Link href="/profile" legacyBehavior passHref>
+              <a style={{ textDecoration: "none", color: "inherit" }}>
+                <AccountCircle />
+              </a>
+            </Link>
+          }
           sx={{
             color: currentPath === "/profile" ? "#2525A7" : "#000",
             textTransform: "uppercase",
