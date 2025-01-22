@@ -6,6 +6,12 @@ const FilterContainer = styled.div`
   display: flex;
   gap: 10px;
   padding: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const expertises = [
@@ -36,6 +42,10 @@ export default function Filter({ onExpertiseSelect }) {
           variant={
             selectedExpertiseTag === expertise ? "contained" : "outlined"
           }
+          sx={{
+            flexShrink: 0,
+            minWidth: "100px",
+          }}
         >
           {expertise}
         </Button>
