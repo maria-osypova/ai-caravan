@@ -1,5 +1,16 @@
 import React from "react";
-import { Card, CardContent, Typography, TextField } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Checkbox,
+  FormControlLabel,
+} from "@mui/material";
 
 const OnboardingCard = ({ question, fields }) => {
   return (
@@ -7,7 +18,7 @@ const OnboardingCard = ({ question, fields }) => {
       style={{
         display: "flex",
         width: "343px",
-        height: "490px",
+        height: "500px",
         padding: "32px 24px",
         flexDirection: "column",
         alignItems: "flex-start",
@@ -33,16 +44,47 @@ const OnboardingCard = ({ question, fields }) => {
           {question}
         </Typography>
         {fields.map((field, index) => (
-          <TextField
-            key={index}
-            label={field.label}
-            variant="standard"
-            fullWidth
-            name={field.name}
-            value={field.value}
-            onChange={field.onChange}
-            style={{ display: field.disabled ? "none" : "block" }}
-          />
+          <FormControl variant="standard" key={index} fullWidth margin="normal">
+            {field.type === "text" && (
+              <TextField
+                label={field.label}
+                variant="standard"
+                fullWidth
+                name={field.name}
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+            {field.type === "select" && (
+              <>
+                <InputLabel>{field.label}</InputLabel>
+                <Select
+                  label={field.label}
+                  name={field.name}
+                  value={field.value}
+                  onChange={field.onChange}
+                >
+                  {field.options.map((option, idx) => (
+                    <MenuItem key={idx} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </>
+            )}
+            {field.type === "checkbox" && (
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={field.value}
+                    onChange={field.onChange}
+                    name={field.name}
+                  />
+                }
+                label={field.label}
+              />
+            )}
+          </FormControl>
         ))}
       </CardContent>
     </Card>

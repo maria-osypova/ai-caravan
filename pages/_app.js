@@ -1,13 +1,8 @@
 import GlobalStyle from "../styles/GlobalStyle";
 import { SWRConfig } from "swr";
 import Layout from "@/components/Layout";
-import "../styles/globals.css";
-import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
-  const isPublicPage = router.pathname.startsWith("/public");
-
   return (
     <SWRConfig
       value={{
@@ -20,17 +15,10 @@ export default function App({ Component, pageProps }) {
         },
       }}
     >
-      <div
-        style={{
-          backgroundColor: isPublicPage ? "#2525A7" : "white",
-          minHeight: "100vh",
-        }}
-      >
-        <Layout>
-          <GlobalStyle />
-          <Component {...pageProps} />
-        </Layout>
-      </div>
+      <Layout>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </Layout>
     </SWRConfig>
   );
 }
