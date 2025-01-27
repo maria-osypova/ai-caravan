@@ -1,16 +1,6 @@
 import React from "react";
 import OnboardingForm from "@/components/OnboardingForm";
 
-const onbordingQuestions = [
-  "What is your full name?",
-  "What is your email?",
-  "What is your current role and level?",
-  "Your company name?",
-  "What is your main goal in joining this community?",
-  "What is your city?",
-  "What is your LinkedIn?",
-];
-
 const Onboarding = () => {
   return (
     <div

@@ -12,7 +12,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 
-const OnboardingCard = ({ question, fields }) => {
+const OnboardingCard = ({ question, fields, currentCard, totalCards }) => {
   return (
     <Card
       style={{
@@ -30,6 +30,14 @@ const OnboardingCard = ({ question, fields }) => {
       }}
     >
       <CardContent>
+        <Typography
+          variant="body2"
+          style={{
+            color: "#BDBDBD",
+          }}
+        >
+          Question {currentCard} of {totalCards}
+        </Typography>
         <Typography
           variant="h5"
           component="h2"

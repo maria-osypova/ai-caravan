@@ -162,6 +162,8 @@ const OnboardingForm = () => {
                 : handleInputChange(field.name, event.target.value),
           })
         )}
+        currentCard={currentOnboardingCard + 1}
+        totalCards={onboardingQuestions.length}
       />
       <div
         style={{
