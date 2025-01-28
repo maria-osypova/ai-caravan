@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import OnboardingCard from "./OnbordingCard";
 import { LinearProgress, Button } from "@mui/material";
 
@@ -100,6 +101,7 @@ const onboardingQuestions = [
 ];
 
 const OnboardingForm = () => {
+  const router = useRouter();
   const [currentOnboardingCard, setCurrentOnboardingCard] = useState(0);
   const [newUserData, setNewUserData] = useState({});
 
@@ -122,6 +124,7 @@ const OnboardingForm = () => {
       setCurrentOnboardingCard(currentOnboardingCard + 1);
     } else {
       console.log("Form submitted:", newUserData);
+      router.push("/guest/welcomeMessage");
     }
   };
 

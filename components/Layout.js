@@ -17,7 +17,7 @@ const theme = createTheme({
 
 export default function Layout({ children }) {
   const router = useRouter();
-  const isPublicPage = router.pathname.startsWith("/public");
+  const isPublicPage = router.pathname.startsWith("/guest");
 
   return (
     <ThemeProvider theme={theme}>
