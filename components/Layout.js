@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "./Footer";
 import { useRouter } from "next/router";
+import Login from "./Login";
 
 const theme = createTheme({
   palette: {

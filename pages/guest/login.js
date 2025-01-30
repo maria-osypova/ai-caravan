@@ -1,23 +1,8 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import Login from "@/components/Login";
 
-const Login = () => {
-  return (
-    <Typography
-      variant="h5"
-      component="h2"
-      style={{
-        color: "white",
-        fontSize: "24px",
-        fontStyle: "normal",
-        fontWeight: 600,
-        lineHeight: "116.7%",
-        letterSpacing: "-1.5px",
-      }}
-    >
-      Log in
-    </Typography>
-  );
+const LoginPage = () => {
+  return <Login />;
 };
 
-export default Login;
+export default LoginPage;
