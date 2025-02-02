@@ -60,11 +60,13 @@ export default function UserProfile() {
       ) : (
         <Container maxWidth="md">
           <Box sx={{ my: 4 }}>
-            <Typography variant="h4" gutterBottom>
-              Profile
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
+            <Grid
+              container
+              spacing={2}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item xs={12} textAlign="center">
                 <Image
                   src={photo || "/images/default-avatar.jpg"}
                   alt="Profile Photo"
@@ -72,17 +74,29 @@ export default function UserProfile() {
                   height={92}
                   style={{
                     borderRadius: "24px",
+                    objectFit: "cover",
+                    objectPosition: "top",
                   }}
                 />
               </Grid>
-              <Grid item xs={6}>
-                <Typography variant="body1">{firstName}</Typography>
+              <Grid item xs={12} textAlign="center" sx={{ mt: 2 }}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: "24px",
+                    fontStyle: "normal",
+                    fontWeight: 580,
+                    lineHeight: "133.4%",
+                  }}
+                >
+                  {firstName} <span style={{ margin: "0 8px" }}></span>{" "}
+                  {lastName}
+                </Typography>
               </Grid>
-              <Grid item xs={6}>
-                <Typography variant="body1">{lastName}</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography variant="body1">{email}</Typography>
+              <Grid item xs={12} textAlign="center" sx={{ mt: 1 }}>
+                <Typography variant="body1" sx={{ color: "#757575" }}>
+                  {email}
+                </Typography>
               </Grid>
               <Grid item xs={12}>
                 <Typography variant="h6">Experience</Typography>
