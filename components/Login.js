@@ -49,6 +49,7 @@ export default function Login() {
           alignItems: "center",
           gap: "8px",
           marginTop: "16px",
+          boxShadow: 0,
         }}
       >
         <svg

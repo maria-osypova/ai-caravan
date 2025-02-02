@@ -62,6 +62,61 @@ const JoinButton = styled(Button)`
   background: transparent;
 `;
 
+const ProfileCard = styled(Card)`
+  display: flex;
+  width: 343px;
+  padding: 20px 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #eee;
+  background: transparent;
+  border-radius: 0px;
+  box-shadow: none;
+`;
+
+const ProfileAvatar = styled(Avatar)`
+  width: 68px;
+  height: 68px;
+  margin-right: 12px;
+`;
+
+const ProfileInfo = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const ProfileName = styled(Typography)`
+  color: black;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 143%;
+  letter-spacing: 0.15px;
+`;
+
+const ProfileRole = styled(Typography)`
+  color: #616161;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 128.571%;
+  letter-spacing: 0.17px;
+`;
+
+const ChatButton = styled(Button)`
+  display: flex;
+  padding: 4px 6px 4px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 32px;
+  border: 1px solid #eee;
+  background: transparent;
+  color: black;
+  box-shadow: none;
+`;
+
 export default function UserProfiles() {
   const [selectedExpertise, setSelectedExpertise] = useState("All");
   const { data, error, isLoading } = useSWR(
@@ -121,26 +176,32 @@ export default function UserProfiles() {
       ) : data.length === 0 ? (
         <Typography>No relevant profiles found</Typography>
       ) : (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} sx={{ paddingBottom: "80px" }}>
           {data.map((user) => (
             <Grid item xs={12} sm={6} md={4} key={user._id}>
-              <Card>
-                <CardContent>
-                  <Avatar
-                    src={user.photo}
-                    alt={`${user.firstName} ${user.lastName}`}
+              <ProfileCard>
+                <ProfileAvatar
+                  src={user.photo}
+                  alt={`${user.firstName} ${user.lastName}`}
+                />
+                <ProfileInfo>
+                  <ProfileName>{`${user.firstName} ${user.lastName}`}</ProfileName>
+                  <ProfileRole>{`${user.role} at ${user.company}`}</ProfileRole>
+                </ProfileInfo>
+                <ChatButton
+                  variant="contained"
+                  color="primary"
+                  href="https://ai-caravan.slack.com"
+                >
+                  CHAT
+                  <Image
+                    src="/images/slack_icon.png"
+                    alt="Chat Icon"
+                    width={12}
+                    height={12}
                   />
-                  <Typography variant="h6">{`${user.firstName} ${user.lastName}`}</Typography>
-                  <Typography variant="body2">{user.role}</Typography>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    href="https://slack.com"
-                  >
-                    CHAT
-                  </Button>
-                </CardContent>
-              </Card>
+                </ChatButton>
+              </ProfileCard>
             </Grid>
           ))}
         </Grid>
