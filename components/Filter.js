@@ -16,7 +16,8 @@ const FilterContainer = styled.div`
 
 const expertises = [
   "All",
-  "AI&Data",
+  "Data",
+  "AI",
   "Engineering",
   "Business",
   "Product",
