@@ -1,38 +1,12 @@
-import styled from "styled-components";
-import { StyledButton } from "./StyledButton";
-
-export const FormContainer = styled.form`
-  display: grid;
-  gap: 0.5rem;
-  max-width: 600px;
-  padding: 24px;
-  margin: 0 auto;
-`;
-
-export const Input = styled.input`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-`;
-
-export const Select = styled.select`
-  padding: 0.5rem;
-  font-size: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-`;
-
-export const Textarea = styled.textarea`
-  font-family: inherit;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-`;
-
-export const Label = styled.label`
-  font-weight: bold;
-`;
+import React from "react";
+import {
+  TextField,
+  Button,
+  MenuItem,
+  Grid,
+  Typography,
+  Box,
+} from "@mui/material";
 
 export default function EditProfileForm({ onSubmit, onCancel, defaultData }) {
   function handleSubmit(event) {
@@ -43,68 +17,194 @@ export default function EditProfileForm({ onSubmit, onCancel, defaultData }) {
   }
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{ maxWidth: 600, mx: "auto", p: 3, marginBottom: "74px" }}
+    >
       <input type="hidden" name="_id" value={defaultData?._id} />
-      <Label htmlFor="photo">Photo URL</Label>
-      <Input
-        id="photo"
-        name="photo"
-        type="text"
-        defaultValue={defaultData?.photo}
-      />
-      <Label htmlFor="firstName">First Name</Label>
-      <Input
-        id="firstName"
-        name="firstName"
-        type="text"
-        defaultValue={defaultData?.firstName}
-      />
-      <Label htmlFor="lastName">Last Name</Label>
-      <Input
-        id="lastName"
-        name="lastName"
-        type="text"
-        defaultValue={defaultData?.lastName}
-      />
-      <Label htmlFor="email">Email</Label>
-      <Input
-        id="email"
-        name="email"
-        type="email"
-        defaultValue={defaultData?.email}
-      />
-      <Label htmlFor="linkedin">What is your LinkedIn profile?</Label>
-      <Input
-        id="linkedin"
-        name="linkedin"
-        type="text"
-        defaultValue={defaultData?.linkedin}
-      />
-      <Label htmlFor="role">What is your current role?</Label>
-      <Input
-        id="role"
-        name="role"
-        type="text"
-        defaultValue={defaultData?.role}
-      />
-      <Label htmlFor="expertise">
-        What best describes your area of expertise?
-      </Label>
-      <Select
-        id="expertise"
-        name="expertise"
-        defaultValue={defaultData?.expertise}
-      >
-        <option value="AI&Data">AI&Data</option>
-        <option value="Engineering">Engineering</option>
-        <option value="Business">Business</option>
-        <option value="Product">Product</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Operations">Operations</option>
-        <option value="Investments">Investments</option>
-      </Select>
-      <StyledButton onClick={onCancel}>Cancel</StyledButton>
-      <StyledButton type="submit">Save</StyledButton>
-    </FormContainer>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography variant="h6">Basic Information</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Photo URL"
+            name="photo"
+            defaultValue={defaultData?.photo}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            fullWidth
+            label="First Name"
+            name="firstName"
+            defaultValue={defaultData?.firstName}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            fullWidth
+            label="Last Name"
+            name="lastName"
+            defaultValue={defaultData?.lastName}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Email"
+            name="email"
+            type="email"
+            defaultValue={defaultData?.email}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6">Experience</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Role"
+            name="role"
+            defaultValue={defaultData?.role}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            select
+            label="Level"
+            name="level"
+            defaultValue={defaultData?.level}
+          >
+            {[
+              "Junior",
+              "Mid-Level",
+              "Senior",
+              "Lead",
+              "Principal",
+              "Head of",
+              "Director",
+              "Vice President",
+              "C-Level",
+              "Founder",
+              "Investor / Venture Capitalist",
+            ].map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            select
+            label="Expertise"
+            name="expertise"
+            defaultValue={defaultData?.expertise}
+          >
+            {[
+              "AI",
+              "Data",
+              "Engineering",
+              "Business",
+              "Product",
+              "Marketing",
+              "Operations",
+              "Investments",
+            ].map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Company Name"
+            name="company"
+            defaultValue={defaultData?.company}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6">Additional Information</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="City"
+            name="city"
+            defaultValue={defaultData?.city}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="LinkedIn"
+            name="linkedin"
+            defaultValue={defaultData?.linkedin}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            select
+            label="Primary Goal"
+            name="goal"
+            defaultValue={defaultData?.goal}
+          >
+            {[
+              "A new job opportunity",
+              "Career growth support and mentorship",
+              "Onboarding to local ecosystem",
+              "New connections and friends",
+              "Finding a co-founder",
+              "Seeking investment for startup",
+              "Seeking a project to invest in",
+              "Hiring talent",
+              "Exploring AI & Data",
+            ].map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            fullWidth
+            variant="contained"
+            color="secondary"
+            onClick={onCancel}
+            style={{
+              backgroundColor: "white",
+              color: "black",
+              borderRadius: "32px",
+            }}
+          >
+            Cancel
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            type="submit"
+            style={{
+              backgroundColor: "#2525A7",
+              color: "white",
+              borderRadius: "32px",
+            }}
+          >
+            Save
+          </Button>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

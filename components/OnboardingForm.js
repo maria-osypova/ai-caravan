@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import OnboardingCard from "./OnbordingCard";
-import { LinearProgress, Button } from "@mui/material";
+import { Button } from "@mui/material";
 
 const onboardingQuestions = [
   {
@@ -42,7 +42,8 @@ const onboardingQuestions = [
         name: "expertise",
         type: "select",
         options: [
-          "AI&Data",
+          "AI",
+          "Data",
           "Engineering",
           "Business",
           "Product",
@@ -119,12 +120,28 @@ const OnboardingForm = () => {
     }));
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentOnboardingCard < onboardingQuestions.length - 1) {
       setCurrentOnboardingCard(currentOnboardingCard + 1);
     } else {
-      console.log("Form submitted:", newUserData);
-      router.push("/guest/welcomeMessage");
+      try {
+        const response = await fetch("/api/user", {
+          method: "POST",
+          body: JSON.stringify(newUserData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Form submitted:", data);
+          router.push("/guest/welcomeMessage");
+        } else {
+          console.error(`Error: ${response.status}`);
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     }
   };
 

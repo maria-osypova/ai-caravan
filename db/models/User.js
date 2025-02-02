@@ -28,7 +28,8 @@ const userSchema = new Schema({
     type: String,
     required: true,
     enum: [
-      "AI&Data",
+      "AI",
+      "Data",
       "Engineering",
       "Business",
       "Product",
@@ -36,6 +37,50 @@ const userSchema = new Schema({
       "Operations",
       "Investments",
     ],
+  },
+  level: {
+    type: String,
+    required: true,
+    enum: [
+      "Junior",
+      "Mid-Level",
+      "Senior",
+      "Lead",
+      "Principal",
+      "Head of",
+      "Director",
+      "Vice President",
+      "C-Level",
+      "Founder",
+      "Investor / Venture Capitalist",
+    ],
+  },
+  company: {
+    type: String,
+    required: true,
+  },
+  unemployed: {
+    type: Boolean,
+    default: false,
+  },
+  goal: {
+    type: String,
+    required: true,
+    enum: [
+      "A new job opportunity",
+      "Career growth support and mentorship",
+      "Onboarding to local ecosystem",
+      "New connections and friends",
+      "Finding a co-founder",
+      "Seeking investment for startup",
+      "Seeking a project to invest in",
+      "Hiring talent",
+      "Exploring AI & Data",
+    ],
+  },
+  city: {
+    type: String,
+    required: true,
   },
 });
 
