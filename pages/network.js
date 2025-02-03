@@ -123,6 +123,10 @@ export default function UserProfiles() {
     `/api/users?expertise=${encodeURIComponent(selectedExpertise)}`
   );
 
+  const filteredData = data?.filter(
+    (user) => user._id !== "677ea475319b1d27d240f8dc"
+  );
+
   return (
     <Container>
       <Filter onExpertiseSelect={setSelectedExpertise} />
@@ -173,11 +177,11 @@ export default function UserProfiles() {
         <Typography>No relevant profiles found</Typography>
       ) : isLoading ? (
         <Typography>Loading...</Typography>
-      ) : data.length === 0 ? (
+      ) : filteredData.length === 0 ? (
         <Typography>No relevant profiles found</Typography>
       ) : (
         <Grid container spacing={2} sx={{ paddingBottom: "80px" }}>
-          {data.map((user) => (
+          {filteredData.map((user) => (
             <Grid item xs={12} sm={6} md={4} key={user._id}>
               <ProfileCard>
                 <ProfileAvatar
