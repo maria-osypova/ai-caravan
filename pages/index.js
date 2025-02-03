@@ -149,12 +149,16 @@ export default function UserProfiles() {
   );
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const filteredData = data?.filter(
+    (user) => user._id !== "677ea475319b1d27d240f8dc"
+  );
+
   const handleSkip = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredData.length);
   };
 
   const handleLike = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredData.length);
   };
 
   return (
@@ -164,7 +168,7 @@ export default function UserProfiles() {
         <p>No relevant profiles found</p>
       ) : isLoading ? (
         <p>Loading...</p>
-      ) : data.length === 0 ? (
+      ) : filteredData.length === 0 ? (
         <p>No relevant profiles found</p>
       ) : (
         <Box
@@ -175,7 +179,7 @@ export default function UserProfiles() {
           pb={9}
         >
           <ProfileCard
-            user={data[currentIndex]}
+            user={filteredData[currentIndex]}
             onSkip={handleSkip}
             onLike={handleLike}
           />
